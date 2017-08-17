@@ -7,10 +7,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var index = require('./routes/index');
+var api = require('./routes/api');
 
 var app = express();
 
-var url = 'mongodb://localhost:27017/country';
+var url = 'mongodb://localhost:27017/testingDB';
 
 mongoose.connect(url);
 
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
