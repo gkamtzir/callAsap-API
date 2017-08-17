@@ -8,9 +8,12 @@ var emergencyNumbers = mongoose.Schema({
     number: {
         type: Number,
         required: true
-    },
-    timestamps: true
-});
+    }
+},
+    {
+        timestamps: true
+    }
+);
 
 var country = mongoose.Schema({
     name: {
@@ -35,8 +38,11 @@ var country = mongoose.Schema({
     emergencyNumbers: {
         type: [emergencyNumbers]
     }
-    timestamps: true
-});
+},
+    {
+        timestamps: true
+    }
+);
 
 var Country = mongoose.model('country', country);
 
