@@ -10,7 +10,7 @@ apiRouter.use(bodyParser.json());
 apiRouter.route('/country')
     .get(function(req, res, next) {
 
-        country.find({}, '-_id', function(err, countries) {
+        country.find({}, {_id: 0}, function(err, countries) {
 
             if (err) throw err;
             res.json(countries);
@@ -24,7 +24,7 @@ apiRouter.route('/country/:countryName')
 
         var countryParams = req.params.countryName.slice(0, 1).toUpperCase() + req.params.countryName.toLowerCase().slice(1);
 
-        country.find({name: countryParams}, '-_id', function(err, country) {
+        country.find({name: countryParams}, {_id: 0}, function(err, country) {
 
             if (err) throw err;
             res.json(country);
@@ -38,10 +38,10 @@ apiRouter.route('/country/:countryName/emergencies')
 
         var countryParams = req.params.countryName.slice(0, 1).toUpperCase() + req.params.countryName.toLowerCase().slice(1);
 
-        country.findOne({name: countryParams}, '-_id', function(err, country) {
+        country.findOne({name: countryParams}, {_id: 0, emergencyNumbers: 1}, function(err, emergencyNumbers) {
 
             if (err) throw err;
-            res.json(country.emergencyNumbers);
+            res.json(emergencyNumbers.emergencyNumbers);
 
         });
 
@@ -52,10 +52,10 @@ apiRouter.route('/country/:countryName/languages')
 
         var countryParams = req.params.countryName.slice(0, 1).toUpperCase() + req.params.countryName.toLowerCase().slice(1);
 
-        country.findOne({name: countryParams}, '-_id', function(err, country) {
+        country.findOne({name: countryParams}, {_id: 0, languages: 1}, function(err, languages) {
 
             if (err) throw err;
-            res.json(country.languages);
+            res.json(languages.languages);
 
         });
 
