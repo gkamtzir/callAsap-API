@@ -1,8 +1,8 @@
 {
   "name": "call-asap-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A flexible and robust API for serving emergency phone numbers (Europe only)",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
