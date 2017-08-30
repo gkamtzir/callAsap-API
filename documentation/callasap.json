@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "callAsap",
+    "description": "A flexible and robust API for serving emergency phone numbers (Europe only)",
+    "version": "2.0"
+  },
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/country": {
+      "get": {
+        "tags": [
+          "callasap"
+        ],
+        "description": "This URI is responsible for returning all the available information for every EU country",
+        "responses": {
+          "200": {
+            "description": "An array of EU countries with all the available information",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/country"
+              }
+            }
+          },
+          "500": {
+            "description": "Default error"
+          }
+        }
+      }
+    },
+    "/country/{country}": {
+      "get": {
+        "tags": [
+          "callasap"
+        ],
+        "description": "This URI is responsible for returning all the available information for a specified EU country",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "Country's name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all the available information for a specified EU country",
+            "schema": {
+              "$ref": "#/definitions/country"
+            }
+          },
+          "500": {
+            "description": "Default error"
+          }
+        }
+      }
+    },
+    "/country/{country}/emergencies": {
+      "get": {
+        "tags": [
+          "callasap"
+        ],
+        "description": "This URI is responsible for returning all the availabe emergency phone numbers of a specified EU country",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "Country's name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array with all the available emergency phone numbers for a specified EU country",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/emergencyNumbers"
+              }
+            }
+          },
+          "500": {
+            "description": "Default error"
+          }
+        }
+      }
+    },
+    "/country/{country}/languages": {
+      "get": {
+        "tags": [
+          "callasap"
+        ],
+        "description": "Returns all the available response languages for a specified EU country",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "Country's name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array with all the available response languages",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "500": {
+            "description": "Default error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "country": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Country's name"
+        },
+        "languages": {
+          "type": "array",
+          "description": "Available response languages",
+          "items": {
+            "type": "string"
+          }
+        },
+        "responsiveness": {
+          "type": "number",
+          "description": "How fast the calls are answered in seconds"
+        },
+        "simNeedFor112Calls": {
+          "type": "boolean",
+          "description": "Returns true if sim is required for 112 calls. Otherwise, returns false"
+        },
+        "onlyEmergencyNumber": {
+          "type": "boolean",
+          "description": "Returns true if 112 is the only emergency number available. Otherwise, returns false"
+        },
+        "emergencyNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergencyNumbers"
+          }
+        }
+      }
+    },
+    "emergencyNumbers": {
+      "type": "array",
+      "description": "Available emergency numbers",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of emergency call"
+          },
+          "number": {
+            "type": "number",
+            "description": "The phone number"
+          }
+        }
+      }
+    }
+  }
+}
