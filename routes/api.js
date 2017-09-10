@@ -26,7 +26,7 @@ apiRouter.route('/countries')
 
     });
 
-apiRouter.route('/country')
+apiRouter.route('/countries/details')
     .get(function(req, res, next) {
 
         country.find({}, {_id: 0}, function(err, countries) {
