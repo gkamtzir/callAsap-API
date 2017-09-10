@@ -7,6 +7,25 @@ var apiRouter = express.Router();
 
 apiRouter.use(bodyParser.json());
 
+apiRouter.route('/countries')
+    .get(function(req, res, next) {
+
+        country.find({}, '-_id name', function(err, countries) {
+
+            if (err) throw err;
+
+            var countriesArray = countries.map(function(country) {
+
+                return country.name;
+
+            });
+
+            res.json(countriesArray);
+
+        });
+
+    });
+
 apiRouter.route('/country')
     .get(function(req, res, next) {
 
