@@ -9,7 +9,21 @@ produces:
   - application/json
 basePath: /api
 paths:
-  /country:
+  /countries:
+    get:
+      tags:
+        - callasap
+      description: This URI is responsible for returning all the available countries (EU)
+      responses:
+        '200':
+          description: An array of EU country names
+          schema:
+            type: array
+            items:
+              type: string
+        '500':
+          description: Default error
+  /countries/details:
     get:
       tags:
         - callasap
