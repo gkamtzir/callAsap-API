@@ -41,7 +41,7 @@ apiRouter.route('/countries/details')
 apiRouter.route('/country/:countryName')
     .get(function(req, res, next) {
 
-        var countryParams = req.params.countryName.slice(0, 1).toUpperCase() + req.params.countryName.toLowerCase().slice(1);
+        var countryParams = req.params.countryName.replace(/\b\w/g, function(l){ return l.toUpperCase() })
 
         country.findOne({name: countryParams}, '-_id', function(err, country) {
 
