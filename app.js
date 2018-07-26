@@ -11,7 +11,7 @@ var api = require('./routes/api');
 
 var app = express();
 
-var url = 'mongodb://localhost:27017/testingDB';
+var url = 'mongodb://localhost:27017/country';
 
 mongoose.connect(url);
 
